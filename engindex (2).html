@@ -1,0 +1,831 @@
+﻿<!DOCTYPE html>
+
+
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>英文單字卡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+TC:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+
+<style>
+  :root {
+    --bg:        #e8edf2;
+    --surface:   #f2f5f8;
+    --card:      #ffffff;
+    --primary:   #6e8fa8;
+    --primary-d: #4d7090;
+    --accent:    #a8bfcc;
+    --muted:     #8fa3b0;
+    --border:    #c9d8e2;
+    --text:      #2c3e4a;
+    --text-2:    #5a7080;
+    --text-3:    #8fa3b0;
+    --star:      #c0a882;
+    --tag-bg:    #dce8ef;
+    --shadow:    0 4px 24px rgba(110,143,168,.13);
+    --shadow-lg: 0 12px 40px rgba(80,120,150,.18);
+    --radius:    16px;
+    --radius-sm: 10px;
+  }
+
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+  /* ── Password Screen ── */
+  #lockScreen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn .4s ease;
+  }
+  @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+
+
+  .lock-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    padding: 52px 48px 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+  }
+
+
+  .lock-icon {
+    font-size: 2.2rem;
+    margin-bottom: -4px;
+  }
+
+
+  .lock-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.7rem;
+    color: var(--primary-d);
+    font-style: italic;
+    letter-spacing: .03em;
+  }
+
+
+  .lock-sub {
+    font-size: .85rem;
+    color: var(--text-3);
+    line-height: 1.6;
+    margin-top: -8px;
+  }
+
+
+  .lock-input {
+    width: 100%;
+    padding: 13px 18px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1rem;
+    color: var(--text);
+    outline: none;
+    text-align: center;
+    letter-spacing: .12em;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .lock-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(110,143,168,.15);
+  }
+  .lock-input.error {
+    border-color: #c0726a;
+    animation: shake .3s ease;
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0) }
+    25%      { transform: translateX(-6px) }
+    75%      { transform: translateX(6px) }
+  }
+
+
+  .lock-btn {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    border: none;
+    background: var(--primary);
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: .95rem;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: .06em;
+    transition: background .2s, transform .15s;
+  }
+  .lock-btn:hover { background: var(--primary-d); transform: translateY(-1px); }
+  .lock-btn:active { transform: translateY(0); }
+
+
+  .lock-error {
+    font-size: .82rem;
+    color: #b05a54;
+    min-height: 18px;
+    transition: opacity .2s;
+  }
+
+
+  .lock-hide { display: none !important; }
+
+
+  /* ── Header ── */
+  header {
+    width: 100%;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+
+  .site-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.45rem;
+    color: var(--primary-d);
+    letter-spacing: .04em;
+    font-style: italic;
+    flex-shrink: 0;
+  }
+
+
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--card);
+    color: var(--text-2);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: .82rem;
+    cursor: pointer;
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--primary); color: var(--primary); background: #f0f5f9; }
+  .btn.active { border-color: var(--primary); background: var(--primary); color: #fff; }
+
+
+  .btn-icon {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--card);
+    color: var(--text-2);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    transition: all .2s;
+    flex-shrink: 0;
+  }
+  .btn-icon:hover { border-color: var(--primary); color: var(--primary); }
+
+
+  /* ── Main ── */
+  main {
+    width: 100%;
+    max-width: 760px;
+    padding: 32px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+
+  /* ── Progress & Nav ── */
+  .progress-bar-wrap {
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 4px;
+    transition: width .4s cubic-bezier(.4,0,.2,1);
+  }
+
+
+  .counter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--muted);
+    letter-spacing: .06em;
+    align-self: flex-end;
+  }
+
+
+  /* ── Jump bar ── */
+  .jump-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+  .jump-bar input {
+    width: 80px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--card);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: .85rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s;
+  }
+  .jump-bar input:focus { border-color: var(--primary); }
+  .jump-bar span { font-size: .82rem; color: var(--text-3); }
+
+
+  /* ── Card ── */
+  .card-wrapper {
+    width: 100%;
+    perspective: 1200px;
+  }
+
+
+  .card {
+    width: 100%;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 40px 44px 36px;
+    position: relative;
+    border: 1px solid var(--border);
+    animation: cardIn .35s cubic-bezier(.4,0,.2,1);
+  }
+
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(12px) scale(.99); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+
+  .word-main {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.8rem;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: .01em;
+  }
+
+
+  .star-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: var(--border);
+    transition: color .2s, transform .2s;
+    padding: 4px;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .star-btn.starred { color: var(--star); transform: scale(1.1); }
+  .star-btn:hover { transform: scale(1.15); }
+
+
+  .pos-tag {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--primary);
+    background: var(--tag-bg);
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: .04em;
+  }
+
+
+  .chinese {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: .82rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 8px;
+  }
+
+
+  .example-text {
+    font-size: .95rem;
+    color: var(--text-2);
+    line-height: 1.75;
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+
+  .writing-note {
+    font-size: .88rem;
+    color: var(--text-2);
+    line-height: 1.7;
+    background: var(--tag-bg);
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--primary);
+  }
+
+
+  .tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+
+  .tag {
+    font-size: .78rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--tag-bg);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    letter-spacing: .02em;
+  }
+  .tag.syn { color: #5a8a6a; background: #e4efe8; border-color: #c0dcc8; }
+  .tag.ant { color: #8a5a5a; background: #f0e4e4; border-color: #dcc0c0; }
+
+
+  .no-tag { font-size: .8rem; color: var(--text-3); font-style: italic; }
+
+
+  /* ── Nav buttons ── */
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+
+  .nav-btn {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: var(--card);
+    color: var(--text-2);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s;
+    box-shadow: var(--shadow);
+  }
+  .nav-btn:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); background: #eef3f7; transform: scale(1.06); }
+  .nav-btn:disabled { opacity: .35; cursor: not-allowed; }
+
+
+  /* ── Starred panel ── */
+  .starred-info {
+    font-size: .82rem;
+    color: var(--muted);
+  }
+
+
+  /* ── No data ── */
+  .empty {
+    text-align: center;
+    color: var(--text-3);
+    font-style: italic;
+    padding: 60px 20px;
+  }
+
+
+  /* ── Responsive ── */
+  @media (max-width: 540px) {
+    header { padding: 14px 16px; }
+    .card { padding: 28px 22px 24px; }
+    .word-main { font-size: 2rem; }
+    .site-title { font-size: 1.1rem; }
+  }
+</style>
+
+
+</head>
+<body>
+
+
+<!-- ══ 密碼鎖定頁 ══ -->
+
+
+<div id="lockScreen">
+  <div class="lock-box">
+    <div class="lock-icon">🔑</div>
+    <div class="lock-title">Word Cards</div>
+    <p class="lock-sub">請輸入密碼以繼續</p>
+    <input class="lock-input" id="pwInput" type="password" placeholder="password" autocomplete="off" />
+    <div class="lock-error" id="pwError"></div>
+    <button class="lock-btn" onclick="checkPassword()">進入</button>
+  </div>
+</div>
+
+
+<header>
+  <div class="site-title">Word Cards</div>
+  <div class="header-controls">
+    <div class="jump-bar">
+      <input type="number" id="jumpInput" placeholder="跳轉" min="1" />
+      <span id="jumpHint"></span>
+      <button class="btn" onclick="doJump()">Go</button>
+    </div>
+    <button class="btn" id="shuffleBtn" onclick="toggleShuffle()">🔀 隨機</button>
+    <button class="btn" id="starFilterBtn" onclick="toggleStarFilter()">⭐ 已標記</button>
+  </div>
+</header>
+
+
+<main>
+  <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
+    <div class="starred-info" id="starredInfo"></div>
+    <div class="counter" id="counter"></div>
+  </div>
+
+
+  <div class="progress-bar-wrap" style="width:100%">
+    <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+  </div>
+
+
+  <div class="card-wrapper" id="cardWrapper">
+    <div class="empty">請先加入 JSON 資料或等待載入…</div>
+  </div>
+
+
+  <div class="nav-row">
+    <button class="nav-btn" id="prevBtn" onclick="navigate(-1)" title="上一張">←</button>
+    <button class="nav-btn" onclick="navigate(1)" style="background:var(--primary);border-color:var(--primary);color:#fff;" title="下一張">→</button>
+  </div>
+</main>
+
+
+<script>
+// ── 密碼保護 ──────────────────────────────────────────────
+// ★ 想改密碼：把下面 CORRECT_PASSWORD 的值換掉就好
+const CORRECT_PASSWORD = 'english2024';
+const SESSION_KEY = 'en_card_auth';
+
+
+function checkPassword() {
+  const val = document.getElementById('pwInput').value.trim();
+  const errEl = document.getElementById('pwError');
+  const input = document.getElementById('pwInput');
+
+
+  if (val === CORRECT_PASSWORD) {
+    sessionStorage.setItem(SESSION_KEY, '1');
+    const lock = document.getElementById('lockScreen');
+    lock.style.opacity = '0';
+    lock.style.transition = 'opacity .35s';
+    setTimeout(() => lock.classList.add('lock-hide'), 360);
+  } else {
+    errEl.textContent = '密碼錯誤，請再試一次 🙅';
+    input.classList.add('error');
+    input.value = '';
+    setTimeout(() => {
+      input.classList.remove('error');
+      errEl.textContent = '';
+    }, 1800);
+  }
+}
+
+
+// Enter 鍵送出
+document.getElementById('pwInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') checkPassword();
+});
+
+
+// 同一 session 內不需重輸
+if (sessionStorage.getItem(SESSION_KEY) === '1') {
+  document.getElementById('lockScreen').classList.add('lock-hide');
+}
+
+
+// ── 資料來源 ───────────────────────────────────────────────
+// 方法 A：直接把陣列寫在這裡（適合單檔 GitHub Pages）
+// 方法 B：改用 fetch('your-file.json')
+
+
+const RAW_DATA = [
+  {"id":1822,"word":"Recommend","pos":"v.","chinese":"推薦；建議；介紹","synonyms":["suggest","advise","propose"],"antonyms":["discourage","dissuade"],"example":"My teacher recommended that I read more English newspapers to improve my vocabulary.","writing_note":"常用結構：Recommend that someone (should) + V 或 Recommend + V-ing。"},
+  {"id":1823,"word":"Recommendation","pos":"n.","chinese":"推薦；建議；推薦信","synonyms":["suggestion","advice","reference"],"antonyms":[],"example":"I followed my friend's recommendation and visited the new museum in the city center.","writing_note":"描述他人給予的建議（letter of recommendation 推薦信）。"},
+  {"id":1824,"word":"Reconcile","pos":"v.","chinese":"使和解；調解；使一致","synonyms":["harmonize","settle","resolve"],"antonyms":["estrange","alienate","clash"],"example":"It is sometimes difficult to reconcile your personal life with a demanding and busy career.","writing_note":"描述兩者達成平衡（reconcile A with B）或兩人和好如初。"},
+  {"id":1825,"word":"Recover","pos":"v.","chinese":"恢復；痊癒；重新獲得","synonyms":["retrieve","recuperate","regain"],"antonyms":["lose","deteriorate"],"example":"It took several weeks for him to fully recover from the surgery and return to work.","writing_note":"常用結構：Recover from...。描述從疾病、損失或震驚中復原。"},
+  {"id":1826,"word":"Recovery","pos":"n.","chinese":"恢復；復甦；收回","synonyms":["restoration","improvement","revival"],"antonyms":["decline","worsening"],"example":"The country's economic recovery has been slower than experts had initially predicted.","writing_note":"描述健康好轉或經濟回升（economic recovery）。"},
+  {"id":1827,"word":"Recreation","pos":"n.","chinese":"娛樂；消遣","synonyms":["leisure","amusement","pastime"],"antonyms":["work","labor"],"example":"The park provides various facilities for recreation, such as tennis courts and hiking trails.","writing_note":"描述工作之餘放鬆身心的活動（recreational center 康樂中心）。"},
+  {"id":1828,"word":"Recruit","pos":"v. / n.","chinese":"徵募；招收（新成員）；新兵；新分子","synonyms":["enlist","enroll","hire"],"antonyms":["fire","dismiss"],"example":"The technology company is trying to recruit more experienced software engineers.","writing_note":"描述企業招募人才（recruitment 招募）。名詞指剛加入的新人。"},
+  {"id":1829,"word":"Rectify","pos":"v.","chinese":"改正；矯正；糾正","synonyms":["correct","remedy","fix"],"antonyms":["damage","ruin"],"example":"We are working hard to rectify the mistakes made in the final version of the report.","writing_note":"比 correct 正式。描述糾正錯誤、解決偏差的情況。"},
+  {"id":1830,"word":"Recur","pos":"v.","chinese":"再發生；定期出現；重新提起","synonyms":["repeat","reappear","return"],"antonyms":[],"example":"The problem with the engine seems to recur every time the weather gets cold.","writing_note":"描述某事重複發生（recurring theme 反覆出現的主題）。"},
+  {"id":1831,"word":"Redeem","pos":"v.","chinese":"贖回；補救；兌換（禮券）；履行","synonyms":["offset","reclaim","fulfill"],"antonyms":[],"example":"He hoped to redeem himself by working twice as hard after his initial failure.","writing_note":"描述透過行動挽回名譽（redeem one's reputation）或兌換點數。"},
+  {"id":1832,"word":"Redundant","pos":"adj.","chinese":"多餘的；累贅的；（因人員過剩而）被解僱的","synonyms":["superfluous","excessive","unnecessary"],"antonyms":["essential","necessary","needed"],"example":"With the new automated system, several manual tasks have become completely redundant.","writing_note":"形容語言重複累贅，或指員工因職位消失而失業。"},
+  {"id":1833,"word":"Refine","pos":"v.","chinese":"精煉；使優美；完善","synonyms":["purify","polish","improve"],"antonyms":["corrupt","damage"],"example":"The author spent months refining the plot of her novel to make it more exciting.","writing_note":"物理上指提煉石油/糖。比喻用法指「改進計畫、技術或舉止」。"},
+  {"id":1834,"word":"Refined","pos":"adj.","chinese":"精煉的；文雅的；高尚的","synonyms":["sophisticated","elegant","polished"],"antonyms":["crude","rough","rude"],"example":"She has very refined tastes in music and art, preferring classical works to modern ones.","writing_note":"形容一個人舉止優雅、有教養，或指加工過的（refined sugar 精製糖）。"},
+  {"id":1835,"word":"Reflect","pos":"v.","chinese":"反射；反映；深思；思考","synonyms":["mirror","display","contemplate"],"antonyms":[],"example":"It is important to find time to reflect on your progress and set new goals for the future.","writing_note":"常用結構：Reflect on... (深思/反省)。指影像反射或呈現出某種真相。"},
+  {"id":1836,"word":"Reflection","pos":"n.","chinese":"反射；倒影；反映；深思","synonyms":["image","meditation","consideration"],"antonyms":[],"example":"After careful reflection, he decided to turn down the job offer and stay with his current company.","writing_note":"描述鏡中倒影或經過深思熟慮後的想法。"},
+  {"id":1837,"word":"Reform","pos":"v. / n.","chinese":"改革；改良；革新","synonyms":["improve","amend","renovate"],"antonyms":["preserve","maintain"],"example":"The government is introducing a new law to reform the nation's healthcare system.","writing_note":"描述對社會、政治或教育體制進行正式的改善。"},
+  {"id":1838,"word":"Refrain","pos":"v. / n.","chinese":"克制；節制；避免；（詩歌的）疊句","synonyms":["abstain","forbear","avoid"],"antonyms":["indulge","continue"],"example":"Please refrain from smoking inside the building and near the entrance.","writing_note":"常用結構：Refrain from + V-ing。語氣正式且客氣，指「忍住不做某事」。"},
+  {"id":1839,"word":"Refresh","pos":"v.","chinese":"使振作；使恢復活力；更新（網頁）","synonyms":["rejuvenate","revitalize","update"],"antonyms":["tire","exhaust"],"example":"A short walk in the fresh air can help to refresh your mind and increase your focus.","writing_note":"描述恢復體力或讓心情變好。電腦用語指重新載入。"},
+  {"id":1840,"word":"Refuge","pos":"n.","chinese":"避難（所）；庇護","synonyms":["shelter","haven","sanctuary"],"antonyms":[],"example":"During the heavy rainstorm, the hikers found refuge in a small cave on the mountain.","writing_note":"描述躲避危險的安全處（take refuge 尋求避難）。"},
+  {"id":1841,"word":"Refugee","pos":"n.","chinese":"難民；流亡者","synonyms":["exile","displaced person"],"antonyms":[],"example":"International organizations are providing aid and shelter to thousands of refugees fleeing the war.","writing_note":"指因戰爭、災害或迫害而被迫離開家園的人。"},
+  {"id":1842,"word":"Refund","pos":"v. / n.","chinese":"退還；償還；退款","synonyms":["repay","reimburse","rebate"],"antonyms":[],"example":"If the product is damaged, you can return it to the store and ask for a full refund.","writing_note":"描述因不滿意或產品問題而拿回已支付的錢。"},
+  {"id":1843,"word":"Refusal","pos":"n.","chinese":"拒絕","synonyms":["rejection","denial","veto"],"antonyms":["acceptance","agreement"],"example":"His refusal to help his friend in need caused a serious argument between them.","writing_note":"描述不願意做某事或不接受某提議的行為。"},
+  {"id":1844,"word":"Refuse","pos":"v. / n.","chinese":"拒絕；回絕；垃圾；廢物","synonyms":["decline","reject","garbage"],"antonyms":["accept","agree"],"example":"I had to refuse the invitation because I already had other plans for that evening.","writing_note":"常用結構：Refuse to + V。名詞指垃圾（發音不同，重音在前）。"},
+  {"id":1845,"word":"Refute","pos":"v.","chinese":"駁斥；反駁","synonyms":["disprove","rebut","contradict"],"antonyms":["prove","confirm","support"],"example":"The scientist published a paper to refute the findings of the previous research study.","writing_note":"15 級分作文高級詞。描述用證據或邏輯證明對方的言論是錯誤的。"},
+  {"id":1846,"word":"Regard","pos":"v. / n.","chinese":"認為；看作；注視；尊重；問候","synonyms":["consider","view","respect"],"antonyms":["ignore","neglect"],"example":"He is highly regarded as one of the best software engineers in the company.","writing_note":"常用結構：Regard A as B。名詞常用於問候（Regards）。"},
+  {"id":1847,"word":"Regardless","pos":"adv. / adj.","chinese":"不管怎樣地；不顧一切地","synonyms":["nonetheless","anyway"],"antonyms":[],"example":"The team decided to continue with the project regardless of the many challenges they faced.","writing_note":"常用結構：Regardless of... (不管/不論...)。描述不受外在因素影響。"},
+  {"id":1848,"word":"Regime","pos":"n.","chinese":"政體；政權；管理制度；養生法","synonyms":["government","authority","system"],"antonyms":[],"example":"The new regime implemented several economic reforms to encourage foreign investment.","writing_note":"通常指「特定政府的統治」或「嚴格的規律飲食/運動計畫」。"},
+  {"id":1849,"word":"Region","pos":"n.","chinese":"地區；地帶；領域","synonyms":["area","district","zone"],"antonyms":[],"example":"The southern region of the country is famous for its beautiful beaches and warm weather.","writing_note":"描述地理上的區域。形容詞 Regional（地方性的）。"},
+  {"id":1850,"word":"Register","pos":"v. / n.","chinese":"註冊；登記；意識到；登記簿","synonyms":["enroll","record","list"],"antonyms":[],"example":"New students must register for their classes at least two weeks before the semester starts.","writing_note":"常用結構：Register for...。也指儀器「顯示數據」或腦袋「領悟」。"},
+  {"id":1851,"word":"Regret","pos":"v. / n.","chinese":"後悔；遺憾；惋惜","synonyms":["rue","repent","sorrow"],"antonyms":["satisfaction","contentment"],"example":"I regret not spending more time with my grandparents when I had the opportunity.","writing_note":"常用結構：Regret + V-ing (後悔做過) 或 Regret to tell you (遺憾地告知)。"}
+];
+
+
+// ── 狀態 ──────────────────────────────────────────────────
+let allData       = [...RAW_DATA];
+let displayList   = [...allData];   // 當前顯示序列（可能是打亂後的）
+let idx           = 0;
+let starred       = new Set(JSON.parse(localStorage.getItem('en_starred') || '[]'));
+let isShuffled    = false;
+let starFilterOn  = false;
+
+
+// ── 初始化 ────────────────────────────────────────────────
+function init() {
+  displayList = [...allData];
+  idx = 0;
+  updateJumpHint();
+  renderCard();
+}
+
+
+// ── 渲染 ──────────────────────────────────────────────────
+function renderCard() {
+  const wrapper = document.getElementById('cardWrapper');
+  const list = getActiveList();
+
+
+  if (!list.length) {
+    wrapper.innerHTML = `<div class="empty">沒有${starFilterOn ? '已標記的' : ''}單字～</div>`;
+    document.getElementById('counter').textContent = '';
+    document.getElementById('progressBar').style.width = '0%';
+    document.getElementById('starredInfo').textContent = '';
+    return;
+  }
+
+
+  const safeIdx = Math.min(Math.max(idx, 0), list.length - 1);
+  idx = safeIdx;
+  const item = list[safeIdx];
+  const isStarred = starred.has(item.id);
+
+
+  // Tags
+  const synTags = item.synonyms?.length
+    ? item.synonyms.map(s => `<span class="tag syn">${s}</span>`).join('')
+    : `<span class="no-tag">—</span>`;
+
+
+  const antTags = item.antonyms?.length
+    ? item.antonyms.map(a => `<span class="tag ant">${a}</span>`).join('')
+    : `<span class="no-tag">—</span>`;
+
+
+  wrapper.innerHTML = `
+    <div class="card">
+      <div class="card-top">
+        <div class="word-main">${item.word}</div>
+        <button class="star-btn ${isStarred ? 'starred' : ''}" onclick="toggleStar(${item.id})" title="標記">★</button>
+      </div>
+      <div class="pos-tag">${item.pos}</div>
+      <div class="chinese">${item.chinese}</div>
+
+
+      <div class="divider"></div>
+
+
+      <div class="section-label">Example</div>
+      <p class="example-text">${item.example}</p>
+
+
+      ${item.writing_note ? `
+        <div class="divider"></div>
+        <div class="section-label">Writing Note</div>
+        <div class="writing-note">${item.writing_note}</div>
+      ` : ''}
+
+
+      <div class="divider"></div>
+
+
+      <div style="display:flex; gap:24px; flex-wrap:wrap;">
+        <div style="flex:1; min-width:140px;">
+          <div class="section-label" style="margin-bottom:8px">Synonyms</div>
+          <div class="tags-row">${synTags}</div>
+        </div>
+        <div style="flex:1; min-width:140px;">
+          <div class="section-label" style="margin-bottom:8px">Antonyms</div>
+          <div class="tags-row">${antTags}</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+
+  // Counter
+  document.getElementById('counter').textContent = `${safeIdx + 1} / ${list.length}`;
+
+
+  // Progress
+  document.getElementById('progressBar').style.width = `${((safeIdx + 1) / list.length) * 100}%`;
+
+
+  // Starred info
+  document.getElementById('starredInfo').textContent =
+    `已標記 ${starred.size} 個單字`;
+
+
+  // Prev btn
+  document.getElementById('prevBtn').disabled = safeIdx === 0;
+
+
+  updateJumpHint();
+}
+
+
+// ── 取得當前清單 ──────────────────────────────────────────
+function getActiveList() {
+  if (starFilterOn) {
+    return displayList.filter(w => starred.has(w.id));
+  }
+  return displayList;
+}
+
+
+// ── 導航 ──────────────────────────────────────────────────
+function navigate(dir) {
+  const list = getActiveList();
+  idx = Math.min(Math.max(idx + dir, 0), list.length - 1);
+  renderCard();
+}
+
+
+// ── 跳轉 ──────────────────────────────────────────────────
+function doJump() {
+  const v = parseInt(document.getElementById('jumpInput').value);
+  const list = getActiveList();
+  if (!isNaN(v) && v >= 1 && v <= list.length) {
+    idx = v - 1;
+    renderCard();
+  }
+  document.getElementById('jumpInput').value = '';
+}
+
+
+function updateJumpHint() {
+  const list = getActiveList();
+  document.getElementById('jumpHint').textContent = `/ ${list.length}`;
+}
+
+
+// ── 星號 ──────────────────────────────────────────────────
+function toggleStar(id) {
+  if (starred.has(id)) starred.delete(id);
+  else starred.add(id);
+  localStorage.setItem('en_starred', JSON.stringify([...starred]));
+  renderCard();
+}
+
+
+// ── 隨機 ──────────────────────────────────────────────────
+function toggleShuffle() {
+  isShuffled = !isShuffled;
+  document.getElementById('shuffleBtn').classList.toggle('active', isShuffled);
+  if (isShuffled) {
+    displayList = [...allData].sort(() => Math.random() - .5);
+  } else {
+    displayList = [...allData];
+  }
+  idx = 0;
+  renderCard();
+}
+
+
+// ── 只顯示已標記 ──────────────────────────────────────────
+function toggleStarFilter() {
+  starFilterOn = !starFilterOn;
+  document.getElementById('starFilterBtn').classList.toggle('active', starFilterOn);
+  idx = 0;
+  renderCard();
+}
+
+
+// ── 鍵盤 ──────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   navigate(-1);
+  if (e.key === 's' || e.key === 'S') {
+    const list = getActiveList();
+    const item = list[idx];
+    if (item) toggleStar(item.id);
+  }
+});
+
+
+// ── Enter 跳轉 ────────────────────────────────────────────
+document.getElementById('jumpInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doJump();
+});
+
+
+// ── 啟動 ──────────────────────────────────────────────────
+init();
+</script>
+
+
+</body>
+</html>
