@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 
-
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8" />
@@ -9,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+TC:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
-
 
 <style>
   :root {
@@ -32,9 +30,7 @@
     --radius-sm: 10px;
   }
 
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
 
   body {
     font-family: 'Noto Sans TC', sans-serif;
@@ -45,7 +41,6 @@
     flex-direction: column;
     align-items: center;
   }
-
 
   /* ── Password Screen ── */
   #lockScreen {
@@ -59,7 +54,6 @@
     animation: fadeIn .4s ease;
   }
   @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
-
 
   .lock-box {
     background: var(--card);
@@ -76,12 +70,10 @@
     text-align: center;
   }
 
-
   .lock-icon {
     font-size: 2.2rem;
     margin-bottom: -4px;
   }
-
 
   .lock-title {
     font-family: 'DM Serif Display', serif;
@@ -91,14 +83,12 @@
     letter-spacing: .03em;
   }
 
-
   .lock-sub {
     font-size: .85rem;
     color: var(--text-3);
     line-height: 1.6;
     margin-top: -8px;
   }
-
 
   .lock-input {
     width: 100%;
@@ -128,7 +118,6 @@
     75%      { transform: translateX(6px) }
   }
 
-
   .lock-btn {
     width: 100%;
     padding: 13px;
@@ -146,7 +135,6 @@
   .lock-btn:hover { background: var(--primary-d); transform: translateY(-1px); }
   .lock-btn:active { transform: translateY(0); }
 
-
   .lock-error {
     font-size: .82rem;
     color: #b05a54;
@@ -154,9 +142,7 @@
     transition: opacity .2s;
   }
 
-
   .lock-hide { display: none !important; }
-
 
   /* ── Header ── */
   header {
@@ -173,7 +159,6 @@
     backdrop-filter: blur(10px);
   }
 
-
   .site-title {
     font-family: 'DM Serif Display', serif;
     font-size: 1.45rem;
@@ -183,7 +168,6 @@
     flex-shrink: 0;
   }
 
-
   .header-controls {
     display: flex;
     align-items: center;
@@ -192,7 +176,6 @@
     flex: 1;
     justify-content: flex-end;
   }
-
 
   .btn {
     display: inline-flex;
@@ -212,7 +195,6 @@
   .btn:hover { border-color: var(--primary); color: var(--primary); background: #f0f5f9; }
   .btn.active { border-color: var(--primary); background: var(--primary); color: #fff; }
 
-
   .btn-icon {
     width: 34px; height: 34px;
     border-radius: 8px;
@@ -227,7 +209,6 @@
   }
   .btn-icon:hover { border-color: var(--primary); color: var(--primary); }
 
-
   /* ── Main ── */
   main {
     width: 100%;
@@ -238,7 +219,6 @@
     align-items: center;
     gap: 20px;
   }
-
 
   /* ── Progress & Nav ── */
   .progress-bar-wrap {
@@ -255,7 +235,6 @@
     transition: width .4s cubic-bezier(.4,0,.2,1);
   }
 
-
   .counter {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1rem;
@@ -263,7 +242,6 @@
     letter-spacing: .06em;
     align-self: flex-end;
   }
-
 
   /* ── Jump bar ── */
   .jump-bar {
@@ -287,13 +265,11 @@
   .jump-bar input:focus { border-color: var(--primary); }
   .jump-bar span { font-size: .82rem; color: var(--text-3); }
 
-
   /* ── Card ── */
   .card-wrapper {
     width: 100%;
     perspective: 1200px;
   }
-
 
   .card {
     width: 100%;
@@ -306,12 +282,10 @@
     animation: cardIn .35s cubic-bezier(.4,0,.2,1);
   }
 
-
   @keyframes cardIn {
     from { opacity: 0; transform: translateY(12px) scale(.99); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
   }
-
 
   .card-top {
     display: flex;
@@ -320,7 +294,6 @@
     margin-bottom: 6px;
   }
 
-
   .word-main {
     font-family: 'DM Serif Display', serif;
     font-size: 2.8rem;
@@ -328,7 +301,6 @@
     line-height: 1;
     letter-spacing: .01em;
   }
-
 
   .star-btn {
     background: none;
@@ -344,7 +316,6 @@
   .star-btn.starred { color: var(--star); transform: scale(1.1); }
   .star-btn:hover { transform: scale(1.15); }
 
-
   .pos-tag {
     display: inline-block;
     font-family: 'Cormorant Garamond', serif;
@@ -358,7 +329,6 @@
     letter-spacing: .04em;
   }
 
-
   .chinese {
     font-size: 1.25rem;
     font-weight: 500;
@@ -367,14 +337,12 @@
     line-height: 1.6;
   }
 
-
   .divider {
     width: 100%;
     height: 1px;
     background: var(--border);
     margin: 20px 0;
   }
-
 
   .section-label {
     font-family: 'Cormorant Garamond', serif;
@@ -385,7 +353,6 @@
     margin-bottom: 8px;
   }
 
-
   .example-text {
     font-size: .95rem;
     color: var(--text-2);
@@ -393,7 +360,6 @@
     font-style: italic;
     margin-bottom: 0;
   }
-
 
   .writing-note {
     font-size: .88rem;
@@ -405,14 +371,12 @@
     border-left: 3px solid var(--primary);
   }
 
-
   .tags-row {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 4px;
   }
-
 
   .tag {
     font-size: .78rem;
@@ -428,9 +392,7 @@
   .tag.syn { color: #5a8a6a; background: #e4efe8; border-color: #c0dcc8; }
   .tag.ant { color: #8a5a5a; background: #f0e4e4; border-color: #dcc0c0; }
 
-
   .no-tag { font-size: .8rem; color: var(--text-3); font-style: italic; }
-
 
   /* ── Nav buttons ── */
   .nav-row {
@@ -441,7 +403,6 @@
     width: 100%;
     margin-top: 4px;
   }
-
 
   .nav-btn {
     width: 48px; height: 48px;
@@ -458,13 +419,11 @@
   .nav-btn:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); background: #eef3f7; transform: scale(1.06); }
   .nav-btn:disabled { opacity: .35; cursor: not-allowed; }
 
-
   /* ── Starred panel ── */
   .starred-info {
     font-size: .82rem;
     color: var(--muted);
   }
-
 
   /* ── No data ── */
   .empty {
@@ -473,7 +432,6 @@
     font-style: italic;
     padding: 60px 20px;
   }
-
 
   /* ── Responsive ── */
   @media (max-width: 540px) {
@@ -484,13 +442,10 @@
   }
 </style>
 
-
 </head>
 <body>
 
-
 <!-- ══ 密碼鎖定頁 ══ -->
-
 
 <div id="lockScreen">
   <div class="lock-box">
@@ -502,7 +457,6 @@
     <button class="lock-btn" onclick="checkPassword()">進入</button>
   </div>
 </div>
-
 
 <header>
   <div class="site-title">Word Cards</div>
@@ -517,23 +471,19 @@
   </div>
 </header>
 
-
 <main>
   <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
     <div class="starred-info" id="starredInfo"></div>
     <div class="counter" id="counter"></div>
   </div>
 
-
   <div class="progress-bar-wrap" style="width:100%">
     <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
   </div>
 
-
   <div class="card-wrapper" id="cardWrapper">
     <div class="empty">請先加入 JSON 資料或等待載入…</div>
   </div>
-
 
   <div class="nav-row">
     <button class="nav-btn" id="prevBtn" onclick="navigate(-1)" title="上一張">←</button>
@@ -541,19 +491,16 @@
   </div>
 </main>
 
-
 <script>
 // ── 密碼保護 ──────────────────────────────────────────────
 // ★ 想改密碼：把下面 CORRECT_PASSWORD 的值換掉就好
-const CORRECT_PASSWORD = '2025';
+const CORRECT_PASSWORD = 'english2024';
 const SESSION_KEY = 'en_card_auth';
-
 
 function checkPassword() {
   const val = document.getElementById('pwInput').value.trim();
   const errEl = document.getElementById('pwError');
   const input = document.getElementById('pwInput');
-
 
   if (val === CORRECT_PASSWORD) {
     sessionStorage.setItem(SESSION_KEY, '1');
@@ -572,23 +519,18 @@ function checkPassword() {
   }
 }
 
-
 // Enter 鍵送出
 document.getElementById('pwInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') checkPassword();
 });
-
 
 // 同一 session 內不需重輸
 if (sessionStorage.getItem(SESSION_KEY) === '1') {
   document.getElementById('lockScreen').classList.add('lock-hide');
 }
 
-
 // ── 資料來源 ───────────────────────────────────────────────
-// 方法 A：直接把陣列寫在這裡（適合單檔 GitHub Pages）
-// 方法 B：改用 fetch('your-file.json')
-
+// ★ JSON 檔名跟這裡一致，放在同一資料夾即可
 
 const RAW_DATA = [
   {"id":1822,"word":"Recommend","pos":"v.","chinese":"推薦；建議；介紹","synonyms":["suggest","advise","propose"],"antonyms":["discourage","dissuade"],"example":"My teacher recommended that I read more English newspapers to improve my vocabulary.","writing_note":"常用結構：Recommend that someone (should) + V 或 Recommend + V-ing。"},
@@ -623,15 +565,13 @@ const RAW_DATA = [
   {"id":1851,"word":"Regret","pos":"v. / n.","chinese":"後悔；遺憾；惋惜","synonyms":["rue","repent","sorrow"],"antonyms":["satisfaction","contentment"],"example":"I regret not spending more time with my grandparents when I had the opportunity.","writing_note":"常用結構：Regret + V-ing (後悔做過) 或 Regret to tell you (遺憾地告知)。"}
 ];
 
-
 // ── 狀態 ──────────────────────────────────────────────────
-let allData       = [...RAW_DATA];
-let displayList   = [...allData];   // 當前顯示序列（可能是打亂後的）
+let allData       = [];
+let displayList   = [];
 let idx           = 0;
 let starred       = new Set(JSON.parse(localStorage.getItem('en_starred') || '[]'));
 let isShuffled    = false;
 let starFilterOn  = false;
-
 
 // ── 初始化 ────────────────────────────────────────────────
 function init() {
@@ -641,12 +581,10 @@ function init() {
   renderCard();
 }
 
-
 // ── 渲染 ──────────────────────────────────────────────────
 function renderCard() {
   const wrapper = document.getElementById('cardWrapper');
   const list = getActiveList();
-
 
   if (!list.length) {
     wrapper.innerHTML = `<div class="empty">沒有${starFilterOn ? '已標記的' : ''}單字～</div>`;
@@ -656,23 +594,19 @@ function renderCard() {
     return;
   }
 
-
   const safeIdx = Math.min(Math.max(idx, 0), list.length - 1);
   idx = safeIdx;
   const item = list[safeIdx];
   const isStarred = starred.has(item.id);
-
 
   // Tags
   const synTags = item.synonyms?.length
     ? item.synonyms.map(s => `<span class="tag syn">${s}</span>`).join('')
     : `<span class="no-tag">—</span>`;
 
-
   const antTags = item.antonyms?.length
     ? item.antonyms.map(a => `<span class="tag ant">${a}</span>`).join('')
     : `<span class="no-tag">—</span>`;
-
 
   wrapper.innerHTML = `
     <div class="card">
@@ -683,13 +617,10 @@ function renderCard() {
       <div class="pos-tag">${item.pos}</div>
       <div class="chinese">${item.chinese}</div>
 
-
       <div class="divider"></div>
-
 
       <div class="section-label">Example</div>
       <p class="example-text">${item.example}</p>
-
 
       ${item.writing_note ? `
         <div class="divider"></div>
@@ -697,9 +628,7 @@ function renderCard() {
         <div class="writing-note">${item.writing_note}</div>
       ` : ''}
 
-
       <div class="divider"></div>
-
 
       <div style="display:flex; gap:24px; flex-wrap:wrap;">
         <div style="flex:1; min-width:140px;">
@@ -714,27 +643,21 @@ function renderCard() {
     </div>
   `;
 
-
   // Counter
   document.getElementById('counter').textContent = `${safeIdx + 1} / ${list.length}`;
 
-
   // Progress
   document.getElementById('progressBar').style.width = `${((safeIdx + 1) / list.length) * 100}%`;
-
 
   // Starred info
   document.getElementById('starredInfo').textContent =
     `已標記 ${starred.size} 個單字`;
 
-
   // Prev btn
   document.getElementById('prevBtn').disabled = safeIdx === 0;
 
-
   updateJumpHint();
 }
-
 
 // ── 取得當前清單 ──────────────────────────────────────────
 function getActiveList() {
@@ -744,14 +667,12 @@ function getActiveList() {
   return displayList;
 }
 
-
 // ── 導航 ──────────────────────────────────────────────────
 function navigate(dir) {
   const list = getActiveList();
   idx = Math.min(Math.max(idx + dir, 0), list.length - 1);
   renderCard();
 }
-
 
 // ── 跳轉 ──────────────────────────────────────────────────
 function doJump() {
@@ -764,12 +685,10 @@ function doJump() {
   document.getElementById('jumpInput').value = '';
 }
 
-
 function updateJumpHint() {
   const list = getActiveList();
   document.getElementById('jumpHint').textContent = `/ ${list.length}`;
 }
-
 
 // ── 星號 ──────────────────────────────────────────────────
 function toggleStar(id) {
@@ -778,7 +697,6 @@ function toggleStar(id) {
   localStorage.setItem('en_starred', JSON.stringify([...starred]));
   renderCard();
 }
-
 
 // ── 隨機 ──────────────────────────────────────────────────
 function toggleShuffle() {
@@ -793,7 +711,6 @@ function toggleShuffle() {
   renderCard();
 }
 
-
 // ── 只顯示已標記 ──────────────────────────────────────────
 function toggleStarFilter() {
   starFilterOn = !starFilterOn;
@@ -801,7 +718,6 @@ function toggleStarFilter() {
   idx = 0;
   renderCard();
 }
-
 
 // ── 鍵盤 ──────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
@@ -815,17 +731,25 @@ document.addEventListener('keydown', e => {
   }
 });
 
-
 // ── Enter 跳轉 ────────────────────────────────────────────
 document.getElementById('jumpInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') doJump();
 });
 
-
-// ── 啟動 ──────────────────────────────────────────────────
-init();
+// ── 啟動（從 engvol.json 讀資料）────────────────────────
+(async () => {
+  try {
+    const res = await fetch('engvol.json');
+    if (!res.ok) throw new Error('無法載入 engvol.json');
+    allData = await res.json();
+    displayList = [...allData];
+    init();
+  } catch (err) {
+    document.getElementById('cardWrapper').innerHTML =
+      `<div class="empty">⚠️ 讀取失敗：${err.message}<br><small>請確認 engvol.json 和 index.html 在同一個資料夾</small></div>`;
+  }
+})();
 </script>
-
 
 </body>
 </html>
