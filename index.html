@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="zh-TW">
 <head>
@@ -532,38 +532,6 @@ if (sessionStorage.getItem(SESSION_KEY) === '1') {
 // ── 資料來源 ───────────────────────────────────────────────
 // ★ JSON 檔名跟這裡一致，放在同一資料夾即可
 
-const RAW_DATA = [
-  {"id":1822,"word":"Recommend","pos":"v.","chinese":"推薦；建議；介紹","synonyms":["suggest","advise","propose"],"antonyms":["discourage","dissuade"],"example":"My teacher recommended that I read more English newspapers to improve my vocabulary.","writing_note":"常用結構：Recommend that someone (should) + V 或 Recommend + V-ing。"},
-  {"id":1823,"word":"Recommendation","pos":"n.","chinese":"推薦；建議；推薦信","synonyms":["suggestion","advice","reference"],"antonyms":[],"example":"I followed my friend's recommendation and visited the new museum in the city center.","writing_note":"描述他人給予的建議（letter of recommendation 推薦信）。"},
-  {"id":1824,"word":"Reconcile","pos":"v.","chinese":"使和解；調解；使一致","synonyms":["harmonize","settle","resolve"],"antonyms":["estrange","alienate","clash"],"example":"It is sometimes difficult to reconcile your personal life with a demanding and busy career.","writing_note":"描述兩者達成平衡（reconcile A with B）或兩人和好如初。"},
-  {"id":1825,"word":"Recover","pos":"v.","chinese":"恢復；痊癒；重新獲得","synonyms":["retrieve","recuperate","regain"],"antonyms":["lose","deteriorate"],"example":"It took several weeks for him to fully recover from the surgery and return to work.","writing_note":"常用結構：Recover from...。描述從疾病、損失或震驚中復原。"},
-  {"id":1826,"word":"Recovery","pos":"n.","chinese":"恢復；復甦；收回","synonyms":["restoration","improvement","revival"],"antonyms":["decline","worsening"],"example":"The country's economic recovery has been slower than experts had initially predicted.","writing_note":"描述健康好轉或經濟回升（economic recovery）。"},
-  {"id":1827,"word":"Recreation","pos":"n.","chinese":"娛樂；消遣","synonyms":["leisure","amusement","pastime"],"antonyms":["work","labor"],"example":"The park provides various facilities for recreation, such as tennis courts and hiking trails.","writing_note":"描述工作之餘放鬆身心的活動（recreational center 康樂中心）。"},
-  {"id":1828,"word":"Recruit","pos":"v. / n.","chinese":"徵募；招收（新成員）；新兵；新分子","synonyms":["enlist","enroll","hire"],"antonyms":["fire","dismiss"],"example":"The technology company is trying to recruit more experienced software engineers.","writing_note":"描述企業招募人才（recruitment 招募）。名詞指剛加入的新人。"},
-  {"id":1829,"word":"Rectify","pos":"v.","chinese":"改正；矯正；糾正","synonyms":["correct","remedy","fix"],"antonyms":["damage","ruin"],"example":"We are working hard to rectify the mistakes made in the final version of the report.","writing_note":"比 correct 正式。描述糾正錯誤、解決偏差的情況。"},
-  {"id":1830,"word":"Recur","pos":"v.","chinese":"再發生；定期出現；重新提起","synonyms":["repeat","reappear","return"],"antonyms":[],"example":"The problem with the engine seems to recur every time the weather gets cold.","writing_note":"描述某事重複發生（recurring theme 反覆出現的主題）。"},
-  {"id":1831,"word":"Redeem","pos":"v.","chinese":"贖回；補救；兌換（禮券）；履行","synonyms":["offset","reclaim","fulfill"],"antonyms":[],"example":"He hoped to redeem himself by working twice as hard after his initial failure.","writing_note":"描述透過行動挽回名譽（redeem one's reputation）或兌換點數。"},
-  {"id":1832,"word":"Redundant","pos":"adj.","chinese":"多餘的；累贅的；（因人員過剩而）被解僱的","synonyms":["superfluous","excessive","unnecessary"],"antonyms":["essential","necessary","needed"],"example":"With the new automated system, several manual tasks have become completely redundant.","writing_note":"形容語言重複累贅，或指員工因職位消失而失業。"},
-  {"id":1833,"word":"Refine","pos":"v.","chinese":"精煉；使優美；完善","synonyms":["purify","polish","improve"],"antonyms":["corrupt","damage"],"example":"The author spent months refining the plot of her novel to make it more exciting.","writing_note":"物理上指提煉石油/糖。比喻用法指「改進計畫、技術或舉止」。"},
-  {"id":1834,"word":"Refined","pos":"adj.","chinese":"精煉的；文雅的；高尚的","synonyms":["sophisticated","elegant","polished"],"antonyms":["crude","rough","rude"],"example":"She has very refined tastes in music and art, preferring classical works to modern ones.","writing_note":"形容一個人舉止優雅、有教養，或指加工過的（refined sugar 精製糖）。"},
-  {"id":1835,"word":"Reflect","pos":"v.","chinese":"反射；反映；深思；思考","synonyms":["mirror","display","contemplate"],"antonyms":[],"example":"It is important to find time to reflect on your progress and set new goals for the future.","writing_note":"常用結構：Reflect on... (深思/反省)。指影像反射或呈現出某種真相。"},
-  {"id":1836,"word":"Reflection","pos":"n.","chinese":"反射；倒影；反映；深思","synonyms":["image","meditation","consideration"],"antonyms":[],"example":"After careful reflection, he decided to turn down the job offer and stay with his current company.","writing_note":"描述鏡中倒影或經過深思熟慮後的想法。"},
-  {"id":1837,"word":"Reform","pos":"v. / n.","chinese":"改革；改良；革新","synonyms":["improve","amend","renovate"],"antonyms":["preserve","maintain"],"example":"The government is introducing a new law to reform the nation's healthcare system.","writing_note":"描述對社會、政治或教育體制進行正式的改善。"},
-  {"id":1838,"word":"Refrain","pos":"v. / n.","chinese":"克制；節制；避免；（詩歌的）疊句","synonyms":["abstain","forbear","avoid"],"antonyms":["indulge","continue"],"example":"Please refrain from smoking inside the building and near the entrance.","writing_note":"常用結構：Refrain from + V-ing。語氣正式且客氣，指「忍住不做某事」。"},
-  {"id":1839,"word":"Refresh","pos":"v.","chinese":"使振作；使恢復活力；更新（網頁）","synonyms":["rejuvenate","revitalize","update"],"antonyms":["tire","exhaust"],"example":"A short walk in the fresh air can help to refresh your mind and increase your focus.","writing_note":"描述恢復體力或讓心情變好。電腦用語指重新載入。"},
-  {"id":1840,"word":"Refuge","pos":"n.","chinese":"避難（所）；庇護","synonyms":["shelter","haven","sanctuary"],"antonyms":[],"example":"During the heavy rainstorm, the hikers found refuge in a small cave on the mountain.","writing_note":"描述躲避危險的安全處（take refuge 尋求避難）。"},
-  {"id":1841,"word":"Refugee","pos":"n.","chinese":"難民；流亡者","synonyms":["exile","displaced person"],"antonyms":[],"example":"International organizations are providing aid and shelter to thousands of refugees fleeing the war.","writing_note":"指因戰爭、災害或迫害而被迫離開家園的人。"},
-  {"id":1842,"word":"Refund","pos":"v. / n.","chinese":"退還；償還；退款","synonyms":["repay","reimburse","rebate"],"antonyms":[],"example":"If the product is damaged, you can return it to the store and ask for a full refund.","writing_note":"描述因不滿意或產品問題而拿回已支付的錢。"},
-  {"id":1843,"word":"Refusal","pos":"n.","chinese":"拒絕","synonyms":["rejection","denial","veto"],"antonyms":["acceptance","agreement"],"example":"His refusal to help his friend in need caused a serious argument between them.","writing_note":"描述不願意做某事或不接受某提議的行為。"},
-  {"id":1844,"word":"Refuse","pos":"v. / n.","chinese":"拒絕；回絕；垃圾；廢物","synonyms":["decline","reject","garbage"],"antonyms":["accept","agree"],"example":"I had to refuse the invitation because I already had other plans for that evening.","writing_note":"常用結構：Refuse to + V。名詞指垃圾（發音不同，重音在前）。"},
-  {"id":1845,"word":"Refute","pos":"v.","chinese":"駁斥；反駁","synonyms":["disprove","rebut","contradict"],"antonyms":["prove","confirm","support"],"example":"The scientist published a paper to refute the findings of the previous research study.","writing_note":"15 級分作文高級詞。描述用證據或邏輯證明對方的言論是錯誤的。"},
-  {"id":1846,"word":"Regard","pos":"v. / n.","chinese":"認為；看作；注視；尊重；問候","synonyms":["consider","view","respect"],"antonyms":["ignore","neglect"],"example":"He is highly regarded as one of the best software engineers in the company.","writing_note":"常用結構：Regard A as B。名詞常用於問候（Regards）。"},
-  {"id":1847,"word":"Regardless","pos":"adv. / adj.","chinese":"不管怎樣地；不顧一切地","synonyms":["nonetheless","anyway"],"antonyms":[],"example":"The team decided to continue with the project regardless of the many challenges they faced.","writing_note":"常用結構：Regardless of... (不管/不論...)。描述不受外在因素影響。"},
-  {"id":1848,"word":"Regime","pos":"n.","chinese":"政體；政權；管理制度；養生法","synonyms":["government","authority","system"],"antonyms":[],"example":"The new regime implemented several economic reforms to encourage foreign investment.","writing_note":"通常指「特定政府的統治」或「嚴格的規律飲食/運動計畫」。"},
-  {"id":1849,"word":"Region","pos":"n.","chinese":"地區；地帶；領域","synonyms":["area","district","zone"],"antonyms":[],"example":"The southern region of the country is famous for its beautiful beaches and warm weather.","writing_note":"描述地理上的區域。形容詞 Regional（地方性的）。"},
-  {"id":1850,"word":"Register","pos":"v. / n.","chinese":"註冊；登記；意識到；登記簿","synonyms":["enroll","record","list"],"antonyms":[],"example":"New students must register for their classes at least two weeks before the semester starts.","writing_note":"常用結構：Register for...。也指儀器「顯示數據」或腦袋「領悟」。"},
-  {"id":1851,"word":"Regret","pos":"v. / n.","chinese":"後悔；遺憾；惋惜","synonyms":["rue","repent","sorrow"],"antonyms":["satisfaction","contentment"],"example":"I regret not spending more time with my grandparents when I had the opportunity.","writing_note":"常用結構：Regret + V-ing (後悔做過) 或 Regret to tell you (遺憾地告知)。"}
-];
 
 // ── 狀態 ──────────────────────────────────────────────────
 let allData       = [];
@@ -739,14 +707,14 @@ document.getElementById('jumpInput').addEventListener('keydown', e => {
 // ── 啟動（從 engvol.json 讀資料）────────────────────────
 (async () => {
   try {
-    const res = await fetch('engvol.json');
+    const res = await fetch('data/engvol.json');
     if (!res.ok) throw new Error('無法載入 engvol.json');
     allData = await res.json();
     displayList = [...allData];
     init();
   } catch (err) {
     document.getElementById('cardWrapper').innerHTML =
-      `<div class="empty">⚠️ 讀取失敗：${err.message}<br><small>請確認 engvol.json 和 index.html 在同一個資料夾</small></div>`;
+      `<div class="empty">⚠️ 讀取失敗：${err.message}<br><small>請確認 data/engvol.json 路徑正確</small></div>`;
   }
 })();
 </script>
